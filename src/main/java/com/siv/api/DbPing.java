@@ -1,10 +1,11 @@
 package com.siv.api;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import java.sql.Connection;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DbPing implements CommandLineRunner {

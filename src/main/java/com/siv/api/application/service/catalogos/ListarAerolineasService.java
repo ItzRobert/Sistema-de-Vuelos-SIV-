@@ -1,13 +1,12 @@
 package com.siv.api.application.service.catalogos;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.siv.api.application.dto.catalogos.AerolineaDto;
-import com.siv.api.entity.dbo.catalogos.Aerolinea;
-import com.siv.api.repository.catalogos.AerolineaRepository;
+import com.siv.api.domain.model.catalogos.Aerolinea;
+import com.siv.api.domain.repository.AerolineaRepository;
 
 @Service
 public class ListarAerolineasService {
@@ -19,18 +18,18 @@ public class ListarAerolineasService {
     }
 
     public List<AerolineaDto> listarTodas() {
-        List<Aerolinea> aerolineas = aerolineaRepository.findAll();
-        return aerolineas.stream()
+        return aerolineaRepository.findAll()
+                .stream()
                 .map(this::convertirADto)
-                .collect(Collectors.toList()); 
+                .toList();
     }
 
     private AerolineaDto convertirADto(Aerolinea aerolinea) {
         AerolineaDto dto = new AerolineaDto();
-        dto.setId(aerolinea.getAerolineaId());
-        dto.setCodigoIata(aerolinea.getCodigoIATA());
+        dto.setId(aerolinea.getId());
+        dto.setCodigoIata(aerolinea.getCodigoIata());
         dto.setNombre(aerolinea.getNombre());
-        dto.setActiva(aerolinea.getActiva());
+        dto.setActiva(aerolinea.isActiva());
         return dto;
     }
 }
