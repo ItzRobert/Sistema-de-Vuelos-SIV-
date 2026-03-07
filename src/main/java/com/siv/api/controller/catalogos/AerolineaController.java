@@ -3,24 +3,22 @@ package com.siv.api.controller.catalogos;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.siv.api.application.dto.catalogos.AerolineaDto;
-import com.siv.api.application.service.catalogos.ListarAerolineasService;
+import com.siv.api.application.interfaces.catalogos.IAerolineaService;
 
 @RestController
-@RequestMapping("/aerolineas")
 public class AerolineaController {
 
-    private final ListarAerolineasService listarAerolineasService;
+    private final IAerolineaService aerolineaService;
 
-    public AerolineaController(ListarAerolineasService listarAerolineasService) {
-        this.listarAerolineasService = listarAerolineasService;
+    public AerolineaController(IAerolineaService aerolineaService) {
+        this.aerolineaService = aerolineaService;
     }
 
-    @GetMapping
-    public List<AerolineaDto> listar() {
-        return listarAerolineasService.listarTodas();
+    @GetMapping("/aerolineas")
+    public List<AerolineaDto> listarTodas() {
+        return aerolineaService.listarTodas();
     }
 }

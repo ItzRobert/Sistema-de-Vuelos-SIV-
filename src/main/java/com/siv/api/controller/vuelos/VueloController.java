@@ -9,33 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.siv.api.application.dto.vuelos.CrearVueloRequest;
-import com.siv.api.application.service.vuelos.CrearVueloService;
-import com.siv.api.application.service.vuelos.ListarVuelosService;
-import com.siv.api.domain.model.vuelos.Vuelo;
+import com.siv.api.application.dto.vuelos.VueloDto;
+import com.siv.api.application.interfaces.vuelos.IVueloService;
 
 @RestController
 @RequestMapping("/vuelos")
 public class VueloController {
 
-    
-    private final ListarVuelosService listar;
-    private final CrearVueloService crear;
+    private final IVueloService vueloService;
 
-    
-    public VueloController(ListarVuelosService listar, CrearVueloService crear) {
-        this.listar = listar;
-        this.crear = crear;
+    public VueloController(IVueloService vueloService) {
+        this.vueloService = vueloService;
     }
 
-    
     @GetMapping
-    public List<Vuelo> listar() {
-        return listar.ejecutar();
+    public List<VueloDto> listarTodos() {
+        return vueloService.listarTodos();
     }
 
-    
     @PostMapping
-    public Vuelo crear(@RequestBody CrearVueloRequest request) {
-        return crear.ejecutar(request);
+    public VueloDto crear(@RequestBody CrearVueloRequest request) {
+        return vueloService.crear(request);
     }
 }
