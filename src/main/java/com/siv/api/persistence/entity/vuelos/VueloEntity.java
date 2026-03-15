@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import com.siv.api.persistence.entity.catalogos.Aerolinea;
+import com.siv.api.persistence.entity.catalogos.AerolineaEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Vuelo", schema = "dbo")
-public class Vuelo {
+public class VueloEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,18 +27,18 @@ public class Vuelo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AerolineaId", nullable = false)
-    private Aerolinea aerolinea;
+    private AerolineaEntity aerolinea;
 
     @Column(name = "NumeroVuelo", nullable = false, length = 10)
     private String numeroVuelo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OrigenAeropuertoId", nullable = false)
-    private Aeropuerto origenAeropuerto;
+    private AeropuertoEntity origenAeropuerto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DestinoAeropuertoId", nullable = false)
-    private Aeropuerto destinoAeropuerto;
+    private AeropuertoEntity destinoAeropuerto;
 
     @Column(name = "FechaVuelo", nullable = false)
     private LocalDate fechaVuelo;
@@ -63,7 +63,7 @@ public class Vuelo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EstadoVueloId", nullable = false)
-    private EstadoVuelo estadoVuelo;
+    private EstadoVueloEntity estadoVuelo;
 
     @Column(name = "Fuente", nullable = false, length = 30)
     private String fuente;
@@ -75,17 +75,17 @@ public class Vuelo {
     public Long getVueloId() { return vueloId; }
     public void setVueloId(Long vueloId) { this.vueloId = vueloId; }
 
-    public Aerolinea getAerolinea() { return aerolinea; }
-    public void setAerolinea(Aerolinea aerolinea) { this.aerolinea = aerolinea; }
+    public AerolineaEntity getAerolinea() { return aerolinea; }
+    public void setAerolinea(AerolineaEntity aerolinea) { this.aerolinea = aerolinea; }
 
     public String getNumeroVuelo() { return numeroVuelo; }
     public void setNumeroVuelo(String numeroVuelo) { this.numeroVuelo = numeroVuelo; }
 
-    public Aeropuerto getOrigenAeropuerto() { return origenAeropuerto; }
-    public void setOrigenAeropuerto(Aeropuerto origenAeropuerto) { this.origenAeropuerto = origenAeropuerto; }
+    public AeropuertoEntity getOrigenAeropuerto() { return origenAeropuerto; }
+    public void setOrigenAeropuerto(AeropuertoEntity origenAeropuerto) { this.origenAeropuerto = origenAeropuerto; }
 
-    public Aeropuerto getDestinoAeropuerto() { return destinoAeropuerto; }
-    public void setDestinoAeropuerto(Aeropuerto destinoAeropuerto) { this.destinoAeropuerto = destinoAeropuerto; }
+    public AeropuertoEntity getDestinoAeropuerto() { return destinoAeropuerto; }
+    public void setDestinoAeropuerto(AeropuertoEntity destinoAeropuerto) { this.destinoAeropuerto = destinoAeropuerto; }
 
     public LocalDate getFechaVuelo() { return fechaVuelo; }
     public void setFechaVuelo(LocalDate fechaVuelo) { this.fechaVuelo = fechaVuelo; }
@@ -108,8 +108,8 @@ public class Vuelo {
     public String getTerminal() { return terminal; }
     public void setTerminal(String terminal) { this.terminal = terminal; }
 
-    public EstadoVuelo getEstadoVuelo() { return estadoVuelo; }
-    public void setEstadoVuelo(EstadoVuelo estadoVuelo) { this.estadoVuelo = estadoVuelo; }
+    public EstadoVueloEntity getEstadoVuelo() { return estadoVuelo; }
+    public void setEstadoVuelo(EstadoVueloEntity estadoVuelo) { this.estadoVuelo = estadoVuelo; }
 
     public String getFuente() { return fuente; }
     public void setFuente(String fuente) { this.fuente = fuente; }

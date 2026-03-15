@@ -33,7 +33,7 @@ public class EstadoVueloRepositoryAdapter implements EstadoVueloRepository {
     }
 
     private com.siv.api.domain.model.vuelos.EstadoVuelo toDomain(
-            com.siv.api.persistence.entity.vuelos.EstadoVuelo e
+            com.siv.api.persistence.entity.vuelos.EstadoVueloEntity e
     ) {
         return new com.siv.api.domain.model.vuelos.EstadoVuelo(
                 e.getEstadoVueloId(),
@@ -41,10 +41,10 @@ public class EstadoVueloRepositoryAdapter implements EstadoVueloRepository {
         );
     }
 
-    private com.siv.api.persistence.entity.vuelos.EstadoVuelo toEntity(
+    private com.siv.api.persistence.entity.vuelos.EstadoVueloEntity toEntity(
             com.siv.api.domain.model.vuelos.EstadoVuelo d
     ) {
-        var e = new com.siv.api.persistence.entity.vuelos.EstadoVuelo();
+        var e = new com.siv.api.persistence.entity.vuelos.EstadoVueloEntity();
         e.setEstadoVueloId(d.getId());
         e.setNombre(d.getNombre());
         return e;

@@ -2,7 +2,7 @@ package com.siv.api.persistence.entity;
 
 import java.time.LocalDateTime;
 
-import com.siv.api.persistence.entity.vuelos.Vuelo;
+import com.siv.api.persistence.entity.vuelos.VueloEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ public class CambioOperativo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "VueloId", nullable = false)
-    private Vuelo vuelo;
+    private VueloEntity vuelo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TipoCambioId", nullable = false)
@@ -58,8 +58,8 @@ public class CambioOperativo {
     public Long getCambioOperativoId() { return cambioOperativoId; }
     public void setCambioOperativoId(Long cambioOperativoId) { this.cambioOperativoId = cambioOperativoId; }
 
-    public Vuelo getVuelo() { return vuelo; }
-    public void setVuelo(Vuelo vuelo) { this.vuelo = vuelo; }
+    public VueloEntity getVuelo() { return vuelo; }
+    public void setVuelo(VueloEntity vuelo) { this.vuelo = vuelo; }
 
     public TipoCambio getTipoCambio() { return tipoCambio; }
     public void setTipoCambio(TipoCambio tipoCambio) { this.tipoCambio = tipoCambio; }

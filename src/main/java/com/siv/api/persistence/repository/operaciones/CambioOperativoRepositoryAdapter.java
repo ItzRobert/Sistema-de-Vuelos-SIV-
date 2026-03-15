@@ -85,7 +85,7 @@ public class CambioOperativoRepositoryAdapter implements CambioOperativoReposito
         e.setCambioOperativoId(d.getId());
 
         
-        var vuelo = new com.siv.api.persistence.entity.vuelos.Vuelo();
+        var vuelo = new com.siv.api.persistence.entity.vuelos.VueloEntity();
         vuelo.setVueloId(d.getVueloId());
         e.setVuelo(vuelo);
 

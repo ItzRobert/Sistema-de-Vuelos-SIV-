@@ -9,7 +9,8 @@ import com.siv.api.domain.model.vuelos.Vuelo;
 import com.siv.api.domain.repository.AerolineaRepository;
 import com.siv.api.domain.repository.AeropuertoRepository;
 import com.siv.api.domain.repository.VueloRepository;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 public class VueloService implements IVueloService {
 
     private final VueloRepository vueloRepository;
@@ -35,41 +36,53 @@ public class VueloService implements IVueloService {
     }
 
     @Override
+    public VueloDto obtenerPorId(Long id) {
+        Vuelo vuelo = vueloRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Vuelo no encontrado"));
+
+        return convertirADto(vuelo);
+    }
+
+    @Override
     public VueloDto crear(CrearVueloRequest request) {
-        if (request.numero == null || request.numero.isBlank()) {
+
+    	if (request.getNumeroVuelo() == null || request.getNumeroVuelo().isBlank()) {
             throw new IllegalArgumentException("El número de vuelo es obligatorio");
         }
 
-        if (request.origenAeropuertoId.equals(request.destinoAeropuertoId)) {
+        if (request.getOrigenAeropuertoId().equals(request.getDestinoAeropuertoId())) {
             throw new IllegalArgumentException("El aeropuerto origen y destino no pueden ser iguales");
         }
 
-        aerolineaRepository.findById(request.aerolineaId.intValue())
+        aerolineaRepository.findById(request.getAerolineaId().intValue())
                 .orElseThrow(() -> new IllegalArgumentException("La aerolínea no existe"));
 
-        aeropuertoRepository.findById(request.origenAeropuertoId.intValue())
+        aeropuertoRepository.findById(request.getOrigenAeropuertoId().intValue())
                 .orElseThrow(() -> new IllegalArgumentException("El aeropuerto origen no existe"));
 
-        aeropuertoRepository.findById(request.destinoAeropuertoId.intValue())
+        aeropuertoRepository.findById(request.getDestinoAeropuertoId().intValue())
                 .orElseThrow(() -> new IllegalArgumentException("El aeropuerto destino no existe"));
 
         Vuelo vuelo = new Vuelo(
                 null,
-                request.numero,
-                request.aerolineaId,
-                request.origenAeropuertoId,
-                request.destinoAeropuertoId,
-                request.fecha,
-                request.horaSalida,
-                request.horaLlegada
+                request.getNumeroVuelo(),
+                request.getAerolineaId().longValue(),
+                request.getOrigenAeropuertoId().longValue(),
+                request.getDestinoAeropuertoId().longValue(),
+                request.getEstadoVueloId().longValue(),
+                request.getFuente(),
+                LocalDate.parse(request.getFechaVuelo()),
+                LocalTime.parse(request.getHoraProgramadaSalida()),
+                LocalTime.parse(request.getHoraProgramadaLlegada())
         );
-
         Vuelo guardado = vueloRepository.save(vuelo);
+
         return convertirADto(guardado);
     }
 
     private VueloDto convertirADto(Vuelo vuelo) {
         VueloDto dto = new VueloDto();
+
         dto.setId(vuelo.getId());
         dto.setNumero(vuelo.getNumero());
         dto.setAerolineaId(vuelo.getAerolineaId());
@@ -78,6 +91,7 @@ public class VueloService implements IVueloService {
         dto.setFecha(vuelo.getFecha());
         dto.setHoraSalida(vuelo.getHoraSalida());
         dto.setHoraLlegada(vuelo.getHoraLlegada());
+
         return dto;
     }
 }

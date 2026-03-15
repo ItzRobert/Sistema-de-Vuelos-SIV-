@@ -10,18 +10,22 @@ public class Vuelo {
     private final Long aerolineaId;
     private final Long origenAeropuertoId;
     private final Long destinoAeropuertoId;
+    private final Long estadoVueloId;
+    private final String fuente;
     private final LocalDate fecha;
     private final LocalTime horaSalida;
     private final LocalTime horaLlegada;
 
     public Vuelo(Long id,
-                 String numero,
-                 Long aerolineaId,
-                 Long origenAeropuertoId,
-                 Long destinoAeropuertoId,
-                 LocalDate fecha,
-                 LocalTime horaSalida,
-                 LocalTime horaLlegada) {
+            String numero,
+            Long aerolineaId,
+            Long origenAeropuertoId,
+            Long destinoAeropuertoId,
+            Long estadoVueloId,
+            String fuente,
+            LocalDate fecha,
+            LocalTime horaSalida,
+            LocalTime horaLlegada) {
 
         if (numero == null || numero.isBlank()) {
             throw new IllegalArgumentException("El número de vuelo no puede estar vacío");
@@ -37,9 +41,11 @@ public class Vuelo {
         this.aerolineaId = aerolineaId;
         this.origenAeropuertoId = origenAeropuertoId;
         this.destinoAeropuertoId = destinoAeropuertoId;
+        this.estadoVueloId = estadoVueloId;
         this.fecha = fecha;
         this.horaSalida = horaSalida;
         this.horaLlegada = horaLlegada;
+        this.fuente = fuente;
     }
 
     public Long getId() {
@@ -62,6 +68,10 @@ public class Vuelo {
         return destinoAeropuertoId;
     }
 
+    public Long getEstadoVueloId() {
+        return estadoVueloId;
+    }
+
     public LocalDate getFecha() {
         return fecha;
     }
@@ -74,8 +84,13 @@ public class Vuelo {
         return horaLlegada;
     }
 
-
     public boolean esVueloMismoDia() {
         return fecha != null;
+        
+        
     }
+
+	public String getFuente() {
+		return fuente;
+	}
 }

@@ -2,7 +2,7 @@ package com.siv.api.persistence.entity;
 
 import java.time.LocalDateTime;
 
-import com.siv.api.persistence.entity.vuelos.Vuelo;
+import com.siv.api.persistence.entity.vuelos.VueloEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ public class Suscripcion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "VueloId", nullable = false)
-    private Vuelo vuelo;
+    private VueloEntity vuelo;
 
     @Column(name = "Email", length = 150)
     private String email;
@@ -52,8 +52,8 @@ public class Suscripcion {
     public Long getSuscripcionId() { return suscripcionId; }
     public void setSuscripcionId(Long suscripcionId) { this.suscripcionId = suscripcionId; }
 
-    public Vuelo getVuelo() { return vuelo; }
-    public void setVuelo(Vuelo vuelo) { this.vuelo = vuelo; }
+    public VueloEntity getVuelo() { return vuelo; }
+    public void setVuelo(VueloEntity vuelo) { this.vuelo = vuelo; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

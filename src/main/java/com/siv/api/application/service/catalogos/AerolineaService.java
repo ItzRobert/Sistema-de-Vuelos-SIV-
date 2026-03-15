@@ -19,16 +19,25 @@ public class AerolineaService implements IAerolineaService {
     public List<AerolineaDto> listarTodas() {
         return aerolineaRepository.findAll()
                 .stream()
-                .map(this::convertirADto)
+                .map(this::convertirDto)
                 .toList();
     }
 
-    private AerolineaDto convertirADto(Aerolinea aerolinea) {
+    @Override
+    public AerolineaDto obtenerPorId(Long id) {
+        var aerolinea = aerolineaRepository.findById(id.intValue())
+                .orElseThrow(() -> new IllegalArgumentException("Aerolínea no encontrada"));
+
+        return convertirDto(aerolinea);
+    }
+
+    private AerolineaDto convertirDto(Aerolinea aerolinea) {
         AerolineaDto dto = new AerolineaDto();
         dto.setId(aerolinea.getId());
         dto.setCodigoIata(aerolinea.getCodigoIata());
         dto.setNombre(aerolinea.getNombre());
         dto.setActiva(aerolinea.isActiva());
         return dto;
+        
     }
 }

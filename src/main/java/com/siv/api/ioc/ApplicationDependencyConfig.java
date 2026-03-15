@@ -15,12 +15,12 @@ import com.siv.api.domain.repository.VueloRepository;
 public class ApplicationDependencyConfig {
 
     @Bean
-    public IAerolineaService aerolineaService(AerolineaRepository aerolineaRepository) {
+    IAerolineaService aerolineaService(AerolineaRepository aerolineaRepository) {
         return new AerolineaService(aerolineaRepository);
     }
 
     @Bean
-    public IVueloService vueloService(
+    IVueloService vueloService(
             VueloRepository vueloRepository,
             AerolineaRepository aerolineaRepository,
             AeropuertoRepository aeropuertoRepository

@@ -2,7 +2,7 @@ package com.siv.api.persistence.repository.vuelos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.siv.api.persistence.entity.vuelos.Vuelo;
+import com.siv.api.persistence.entity.vuelos.VueloEntity;
 
-public interface SpringDataVueloRepository extends JpaRepository<Vuelo, Long> {
+public interface SpringDataVueloRepository extends JpaRepository<VueloEntity, Long> {
 }

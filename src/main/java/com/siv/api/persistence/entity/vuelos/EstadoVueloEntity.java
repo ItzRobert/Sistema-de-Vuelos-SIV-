@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "EstadoVuelo", schema = "dbo")
-public class EstadoVuelo {
+public class EstadoVueloEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

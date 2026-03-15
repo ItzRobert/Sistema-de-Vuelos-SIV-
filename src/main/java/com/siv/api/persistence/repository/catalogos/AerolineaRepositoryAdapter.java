@@ -38,7 +38,7 @@ public class AerolineaRepositoryAdapter implements AerolineaRepository {
 
     // ---------- MAPPERS ----------
     private com.siv.api.domain.model.catalogos.Aerolinea toDomain(
-            com.siv.api.persistence.entity.catalogos.Aerolinea e
+            com.siv.api.persistence.entity.catalogos.AerolineaEntity e
     ) {
         return new com.siv.api.domain.model.catalogos.Aerolinea(
                 e.getAerolineaId() == null ? null : e.getAerolineaId().longValue(),
@@ -48,10 +48,10 @@ public class AerolineaRepositoryAdapter implements AerolineaRepository {
         );
     }
 
-    private com.siv.api.persistence.entity.catalogos.Aerolinea toEntity(
+    private com.siv.api.persistence.entity.catalogos.AerolineaEntity toEntity(
             com.siv.api.domain.model.catalogos.Aerolinea d
     ) {
-        var e = new com.siv.api.persistence.entity.catalogos.Aerolinea();
+        var e = new com.siv.api.persistence.entity.catalogos.AerolineaEntity();
         if (d.getId() != null) {
             e.setAerolineaId(d.getId().intValue()); // Long -> Integer
         }

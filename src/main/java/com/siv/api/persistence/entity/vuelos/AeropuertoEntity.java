@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Aeropuerto", schema = "dbo")
-public class Aeropuerto {
+public class AeropuertoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -35,7 +35,7 @@ public class AeropuertoRepositoryAdapter implements AeropuertoRepository {
     // --------- MAPPERS ---------
 
     private com.siv.api.domain.model.vuelos.Aeropuerto toDomain(
-            com.siv.api.persistence.entity.vuelos.Aeropuerto e
+            com.siv.api.persistence.entity.vuelos.AeropuertoEntity e
     ) {
         return new com.siv.api.domain.model.vuelos.Aeropuerto(
                 e.getAeropuertoId() == null ? null : e.getAeropuertoId().longValue(),
@@ -48,10 +48,10 @@ public class AeropuertoRepositoryAdapter implements AeropuertoRepository {
         );
     }
 
-    private com.siv.api.persistence.entity.vuelos.Aeropuerto toEntity(
+    private com.siv.api.persistence.entity.vuelos.AeropuertoEntity toEntity(
             com.siv.api.domain.model.vuelos.Aeropuerto d
     ) {
-        var e = new com.siv.api.persistence.entity.vuelos.Aeropuerto();
+        var e = new com.siv.api.persistence.entity.vuelos.AeropuertoEntity();
 
         if (d.getId() != null) {
             e.setAeropuertoId(d.getId().intValue());
