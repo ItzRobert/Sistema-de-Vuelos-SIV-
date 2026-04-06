@@ -2,11 +2,9 @@ package com.siv.api.controller.vuelos;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.siv.api.application.dto.vuelos.CrearVueloRequest;
 import com.siv.api.application.dto.vuelos.VueloDto;
@@ -23,12 +21,30 @@ public class VueloController {
     }
 
     @GetMapping
-    public List<VueloDto> listarTodos() {
-        return vueloService.listarTodos();
+    public ResponseEntity<List<VueloDto>> listarTodos() {
+        return ResponseEntity.ok(vueloService.listarTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<VueloDto> obtenerPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(vueloService.obtenerPorId(id));
     }
 
     @PostMapping
-    public VueloDto crear(@RequestBody CrearVueloRequest request) {
-        return vueloService.crear(request);
+    public ResponseEntity<VueloDto> crear(@RequestBody CrearVueloRequest request) {
+        VueloDto creado = vueloService.crear(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(creado);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<VueloDto> actualizar(@PathVariable Long id,
+                                               @RequestBody CrearVueloRequest request) {
+        return ResponseEntity.ok(vueloService.actualizar(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        vueloService.eliminar(id);
+        return ResponseEntity.ok("Vuelo eliminado correctamente.");
     }
 }

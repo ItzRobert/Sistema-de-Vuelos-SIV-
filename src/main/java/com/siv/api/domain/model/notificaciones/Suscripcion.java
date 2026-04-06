@@ -6,8 +6,8 @@ public class Suscripcion {
 
     private final Long id;
     private final Long vueloId;
-    private final String email;     // nullable
-    private final String telefono;  // nullable
+    private final String email;    
+    private final String telefono;  
     private final Boolean activa;
     private final LocalDateTime fechaCreacion;
 

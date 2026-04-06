@@ -32,6 +32,11 @@ public class VueloRepositoryAdapter implements VueloRepository {
         return toDomain(saved);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        jpa.deleteById(id);
+    }
+
     private com.siv.api.domain.model.vuelos.Vuelo toDomain(
             com.siv.api.persistence.entity.vuelos.VueloEntity e
     ) {
@@ -94,7 +99,7 @@ public class VueloRepositoryAdapter implements VueloRepository {
         e.setHoraProgramadaLlegada(d.getHoraLlegada());
         e.setFuente(d.getFuente());
         e.setUltimaActualizacion(java.time.LocalDateTime.now());
+
         return e;
-        
     }
 }

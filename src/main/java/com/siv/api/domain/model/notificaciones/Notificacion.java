@@ -12,10 +12,10 @@ public class Notificacion {
 
     public Notificacion(Long id, Long suscripcionId, String canal, String mensaje, LocalDateTime fechaHora) {
         if (suscripcionId == null) throw new IllegalArgumentException("suscripcionId requerido");
-        if (canal == null || canal.isBlank()) throw new IllegalArgumentException("canal requerido");
-        if (mensaje == null || mensaje.isBlank()) throw new IllegalArgumentException("mensaje requerido");
-        if (fechaHora == null) throw new IllegalArgumentException("fechaHora requerida");
-        this.id = id;
+      if (canal == null || canal.isBlank()) throw new IllegalArgumentException("canal requerido");
+    if (mensaje == null || mensaje.isBlank()) throw new IllegalArgumentException("mensaje requerido");
+       if (fechaHora == null) throw new IllegalArgumentException("fechaHora requerida");
+       this.id = id;
         this.suscripcionId = suscripcionId;
         this.canal = canal;
         this.mensaje = mensaje;

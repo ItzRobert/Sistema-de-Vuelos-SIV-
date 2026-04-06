@@ -6,7 +6,8 @@ import com.siv.api.application.dto.catalogos.AeropuertoDto;
 import com.siv.api.application.interfaces.catalogos.IAeropuertoService;
 import com.siv.api.domain.model.vuelos.Aeropuerto;
 import com.siv.api.domain.repository.AeropuertoRepository;
-
+import org.springframework.stereotype.Service;
+@Service
 public class AeropuertoService implements IAeropuertoService {
 
     private final AeropuertoRepository aeropuertoRepository;

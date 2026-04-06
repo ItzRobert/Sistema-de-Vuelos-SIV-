@@ -54,7 +54,7 @@ public class CambioOperativo {
     @JoinColumn(name = "UsuarioOperativoId", nullable = false)
     private UsuarioOperativo usuarioOperativo;
 
-    // getters/setters
+    
     public Long getCambioOperativoId() { return cambioOperativoId; }
     public void setCambioOperativoId(Long cambioOperativoId) { this.cambioOperativoId = cambioOperativoId; }
 

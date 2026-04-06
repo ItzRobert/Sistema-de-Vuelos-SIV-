@@ -43,7 +43,7 @@ public class AuditoriaEvento {
     @Column(name = "FechaHora", nullable = false)
     private LocalDateTime fechaHora;
 
-    // getters/setters
+    
     public Long getAuditoriaEventoId() { return auditoriaEventoId; }
     public void setAuditoriaEventoId(Long auditoriaEventoId) { this.auditoriaEventoId = auditoriaEventoId; }
 

@@ -6,7 +6,12 @@ import java.util.Optional;
 import com.siv.api.domain.model.vuelos.Vuelo;
 
 public interface VueloRepository {
+
     List<Vuelo> findAll();
+
     Optional<Vuelo> findById(Long id);
+
     Vuelo save(Vuelo vuelo);
+
+    void deleteById(Long id);
 }

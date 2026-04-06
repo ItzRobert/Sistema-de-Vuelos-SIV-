@@ -1,6 +1,10 @@
 package com.siv.api.application.service.vuelos;
 
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import org.springframework.stereotype.Service;
 
 import com.siv.api.application.dto.vuelos.CrearVueloRequest;
 import com.siv.api.application.dto.vuelos.VueloDto;
@@ -9,8 +13,8 @@ import com.siv.api.domain.model.vuelos.Vuelo;
 import com.siv.api.domain.repository.AerolineaRepository;
 import com.siv.api.domain.repository.AeropuertoRepository;
 import com.siv.api.domain.repository.VueloRepository;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
+@Service
 public class VueloService implements IVueloService {
 
     private final VueloRepository vueloRepository;
@@ -46,7 +50,7 @@ public class VueloService implements IVueloService {
     @Override
     public VueloDto crear(CrearVueloRequest request) {
 
-    	if (request.getNumeroVuelo() == null || request.getNumeroVuelo().isBlank()) {
+        if (request.getNumeroVuelo() == null || request.getNumeroVuelo().isBlank()) {
             throw new IllegalArgumentException("El número de vuelo es obligatorio");
         }
 
@@ -75,9 +79,85 @@ public class VueloService implements IVueloService {
                 LocalTime.parse(request.getHoraProgramadaSalida()),
                 LocalTime.parse(request.getHoraProgramadaLlegada())
         );
-        Vuelo guardado = vueloRepository.save(vuelo);
 
-        return convertirADto(guardado);
+        try {
+            Vuelo guardado = vueloRepository.save(vuelo);
+            return convertirADto(guardado);
+
+        } catch (Exception e) {
+            String mensaje = e.getMessage();
+            Throwable causa = e.getCause();
+
+            if ((mensaje != null && mensaje.contains("UQ_Vuelo")) ||
+                (causa != null && causa.getMessage() != null && causa.getMessage().contains("UQ_Vuelo"))) {
+                throw new IllegalArgumentException(
+                        "Ya existe un vuelo con esa aerolínea, número, fecha, origen y destino.");
+            }
+
+            throw e;
+        }
+    }
+
+    @Override
+    public VueloDto actualizar(Long id, CrearVueloRequest request) {
+
+        if (request.getNumeroVuelo() == null || request.getNumeroVuelo().isBlank()) {
+            throw new IllegalArgumentException("El número de vuelo es obligatorio");
+        }
+
+        if (request.getOrigenAeropuertoId().equals(request.getDestinoAeropuertoId())) {
+            throw new IllegalArgumentException("El aeropuerto origen y destino no pueden ser iguales");
+        }
+
+        vueloRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Vuelo no encontrado"));
+
+        aerolineaRepository.findById(request.getAerolineaId().intValue())
+                .orElseThrow(() -> new IllegalArgumentException("La aerolínea no existe"));
+
+        aeropuertoRepository.findById(request.getOrigenAeropuertoId().intValue())
+                .orElseThrow(() -> new IllegalArgumentException("El aeropuerto origen no existe"));
+
+        aeropuertoRepository.findById(request.getDestinoAeropuertoId().intValue())
+                .orElseThrow(() -> new IllegalArgumentException("El aeropuerto destino no existe"));
+
+        Vuelo vueloActualizado = new Vuelo(
+                id,
+                request.getNumeroVuelo(),
+                request.getAerolineaId().longValue(),
+                request.getOrigenAeropuertoId().longValue(),
+                request.getDestinoAeropuertoId().longValue(),
+                request.getEstadoVueloId().longValue(),
+                request.getFuente(),
+                LocalDate.parse(request.getFechaVuelo()),
+                LocalTime.parse(request.getHoraProgramadaSalida()),
+                LocalTime.parse(request.getHoraProgramadaLlegada())
+        );
+
+        try {
+            Vuelo actualizado = vueloRepository.save(vueloActualizado);
+            return convertirADto(actualizado);
+
+        } catch (Exception e) {
+            String mensaje = e.getMessage();
+            Throwable causa = e.getCause();
+
+            if ((mensaje != null && mensaje.contains("UQ_Vuelo")) ||
+                (causa != null && causa.getMessage() != null && causa.getMessage().contains("UQ_Vuelo"))) {
+                throw new IllegalArgumentException(
+                        "Ya existe un vuelo con esa aerolínea, número, fecha, origen y destino.");
+            }
+
+            throw e;
+        }
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        vueloRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Vuelo no encontrado"));
+
+        vueloRepository.deleteById(id);
     }
 
     private VueloDto convertirADto(Vuelo vuelo) {

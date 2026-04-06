@@ -63,7 +63,7 @@ public class AeropuertoRepositoryAdapter implements AeropuertoRepository {
         e.setPais(d.getPais());
         e.setActivo(d.isActivo());
 
-        // si tu domain no maneja fechaCreacion, elimina esta línea.
+       
         e.setFechaCreacion(d.getFechaCreacion());
 
         return e;

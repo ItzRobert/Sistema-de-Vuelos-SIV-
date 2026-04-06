@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class VueloDto {
-
+	private String aerolineaNombre;
+	private String origenNombre;
+	private String destinoNombre;
     private Long id;
     private String numero;
     private Long aerolineaId;
@@ -13,7 +15,29 @@ public class VueloDto {
     private LocalDate fecha;
     private LocalTime horaSalida;
     private LocalTime horaLlegada;
+    public String getAerolineaNombre() {
+        return aerolineaNombre;
+    }
 
+    public void setAerolineaNombre(String aerolineaNombre) {
+        this.aerolineaNombre = aerolineaNombre;
+    }
+
+    public String getOrigenNombre() {
+        return origenNombre;
+    }
+
+    public void setOrigenNombre(String origenNombre) {
+        this.origenNombre = origenNombre;
+    }
+
+    public String getDestinoNombre() {
+        return destinoNombre;
+    }
+
+    public void setDestinoNombre(String destinoNombre) {
+        this.destinoNombre = destinoNombre;
+    }
     public Long getId() {
         return id;
     }

@@ -6,7 +6,9 @@ import com.siv.api.application.dto.catalogos.AerolineaDto;
 import com.siv.api.application.interfaces.catalogos.IAerolineaService;
 import com.siv.api.domain.model.catalogos.Aerolinea;
 import com.siv.api.domain.repository.AerolineaRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AerolineaService implements IAerolineaService {
 
     private final AerolineaRepository aerolineaRepository;

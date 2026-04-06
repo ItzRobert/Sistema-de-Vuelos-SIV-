@@ -26,7 +26,7 @@ public class Notificacion {
     private Suscripcion suscripcion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CambioOperativoId") // nullable
+    @JoinColumn(name = "CambioOperativoId") 
     private CambioOperativo cambioOperativo;
 
     @Column(name = "Canal", nullable = false, length = 10)
@@ -44,7 +44,7 @@ public class Notificacion {
     @Column(name = "FechaEnvio")
     private LocalDateTime fechaEnvio;
 
-    // getters/setters
+    
     public Long getNotificacionId() { return notificacionId; }
     public void setNotificacionId(Long notificacionId) { this.notificacionId = notificacionId; }
 

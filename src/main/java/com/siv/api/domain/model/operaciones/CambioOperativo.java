@@ -8,11 +8,11 @@ public class CambioOperativo {
     private final Long id;
     private final Long vueloId;
     private final Integer tipoCambioId;
-    private final Integer causaOperativaId;     // nullable
-    private final Integer usuarioOperativoId;   // nullable
-    private final String valorAnterior;         // nullable
-    private final String valorNuevo;            // nullable
-    private final String observacion;           // nullable
+    private final Integer causaOperativaId;     
+    private final Integer usuarioOperativoId;   
+    private final String valorAnterior;         
+    private final String valorNuevo;            
+    private final String observacion;           
     private final LocalDateTime fechaHoraCambio;
     private final String fuente;
 
